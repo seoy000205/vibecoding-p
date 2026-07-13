@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계획대로 안 돼도 괜찮아! 오사카 즉흥 여행기</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Gaegu (귀여운 손글씨), Gowun Dodum (깔끔하고 둥근 고딕) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        beige: '#FDFBF7',
+                        yellowPoint: '#FFE082',
+                        brownText: '#4E342E',
+                        brownLight: '#8D6E63',
+                        coralAlert: '#FF8A65',
+                        tapePink: '#FFD1DC',
+                        tapeGreen: '#C8E6C9'
+                    },
+                    fontFamily: {
+                        hand: ['Gaegu', 'cursive'],
+                        body: ['Gowun Dodum', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'retro': '6px 6px 0px 0px #4E342E',
+                        'retro-sm': '3px 3px 0px 0px #4E342E',
+                        'retro-lg': '10px 10px 0px 0px #4E342E',
+                        'retro-active': '2px 2px 0px 0px #4E342E'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Gowun Dodum', sans-serif;
+            background-color: #FDFBF7;
+            color: #4E342E;
+        }
+        .font-handwriting {
+            font-family: 'Gaegu', cursive;
+        }
+        /* 커스텀 일기장 모눈종이 패턴 배경 효과 */
+        .grid-bg {
+            background-size: 24px 24px;
+            background-image: linear-gradient(to right, rgba(78, 52, 46, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(78, 52, 46, 0.05) 1px, transparent 1px);
+        }
+        /* 아날로그 테이프 느낌 스타일 */
+        .tape-effect {
+            position: relative;
+        }
+        .tape-effect::after {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-3deg);
+            width: 80px;
+            height: 24px;
+            background-color: rgba(255, 224, 130, 0.7);
+            border-left: 2px dashed rgba(78, 52, 46, 0.3);
+            border-right: 2px dashed rgba(78, 52, 46, 0.3);
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        /* 커스텀 애니메이션 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-1deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+        .floating-deco {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes swing {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        .swinging {
+            animation: swing 3s ease-in-out infinite;
+        }
+        /* 연필 모양 커스텀 커서 (30도 회전, 입체감 있는 필기 느낌) */
+        html, body, a, button, [onclick] {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cdefs%3E%3ClinearGradient id='pencilBody' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%23FFF3C4'/%3E%3Cstop offset='45%25' stop-color='%23FFE082'/%3E%3Cstop offset='100%25' stop-color='%23D89A00'/%3E%3C/linearGradient%3E%3ClinearGradient id='pencilEraser' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%23FFB199'/%3E%3Cstop offset='50%25' stop-color='%23FF8A65'/%3E%3Cstop offset='100%25' stop-color='%23D65A38'/%3E%3C/linearGradient%3E%3ClinearGradient id='pencilFerrule' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%23F5F5F5'/%3E%3Cstop offset='50%25' stop-color='%23BDBDBD'/%3E%3Cstop offset='100%25' stop-color='%238A8A8A'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='rotate(45 20 20)'%3E%3Cg transform='translate(1.4,1.4)' opacity='0.28'%3E%3Crect x='16' y='4' width='8' height='6' rx='1' fill='%234E342E'/%3E%3Crect x='16' y='10' width='8' height='3' fill='%234E342E'/%3E%3Crect x='16' y='13' width='8' height='16' fill='%234E342E'/%3E%3Cpolygon points='16,29 24,29 20,35' fill='%234E342E'/%3E%3Cpolygon points='18.3,33.4 21.7,33.4 20,36' fill='%234E342E'/%3E%3C/g%3E%3Crect x='16' y='4' width='8' height='6' rx='1' fill='url(%23pencilEraser)' stroke='%234E342E' stroke-width='1.2'/%3E%3Crect x='16' y='10' width='8' height='3' fill='url(%23pencilFerrule)' stroke='%234E342E' stroke-width='1.2'/%3E%3Crect x='16' y='13' width='8' height='16' fill='url(%23pencilBody)' stroke='%234E342E' stroke-width='1.2'/%3E%3Cline x1='19' y1='13' x2='19' y2='29' stroke='%234E342E' stroke-width='0.6' opacity='0.4'/%3E%3Cpolygon points='16,29 24,29 20,35' fill='%23C69C6D' stroke='%234E342E' stroke-width='1.2' stroke-linejoin='round'/%3E%3Cpolygon points='16,29 20,29 20,35' fill='%23A9784F'/%3E%3Cpolygon points='18.3,33.4 21.7,33.4 20,36' fill='%233A3A3A' stroke='%234E342E' stroke-width='0.6' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E") 9 31, auto;
+        }
+        /* 스크롤 진행률 상단바 */
+        #scrollProgressBar {
+            transition: width 0.1s ease-out;
+        }
+        /* 타이핑 효과 커서 깜빡임 */
+        @keyframes blink-caret {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        #typingCursor {
+            animation: blink-caret 0.8s step-end infinite;
+        }
+    </style>
+</head>
+<body class="grid-bg min-h-screen relative overflow-x-hidden selection:bg-yellowPoint selection:text-brownText">
+
+    <!-- 배경 은은한 파티클 효과 -->
+    <canvas id="bgParticles" class="fixed inset-0 w-full h-full pointer-events-none -z-10"></canvas>
+
+    <!-- 스크롤 진행률 상단바 -->
+    <div class="fixed top-0 left-0 w-full h-2 bg-white/50 z-[60] border-b-2 border-brownText">
+        <div id="scrollProgressBar" class="h-full bg-yellowPoint" style="width: 0%;"></div>
+    </div>
+
+    <!-- 1. HERO SECTION -->
+    <header class="container mx-auto px-4 pt-10 pb-16 max-w-5xl">
+        <!-- 네비게이션 미니바 -->
+        <nav class="flex justify-between items-center mb-12 bg-white border-4 border-brownText p-4 rounded-2xl shadow-retro">
+            <a href="#" class="font-handwriting text-2xl font-bold flex items-center gap-2 text-brownText">
+                <span class="text-3xl swinging inline-block">🏯</span> 오사카 3박 4일 여행기
+            </a>
+            <div class="flex gap-3 md:gap-6 font-handwriting text-lg md:text-xl">
+                <a href="#about" class="hover:underline transition-all">스토리</a>
+                <a href="#timeline" class="hover:underline transition-all">타임라인</a>
+                <a href="#diagnose" class="hover:underline transition-all">테스트</a>
+                <a href="#gallery" class="hover:underline transition-all">갤러리</a>
+            </div>
+        </nav>
+
+        <!-- 히어로 본문 디자인 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white border-4 border-brownText rounded-3xl p-6 md:p-10 shadow-retro relative overflow-hidden">
+            <!-- 내부 다이어리 스프링 배경 디자인 효과 -->
+            <div class="absolute left-0 right-0 top-0 h-4 bg-yellowPoint border-b-4 border-brownText"></div>
+            
+            <div class="lg:col-span-7 space-y-6 pt-4">
+                <h1 class="text-4xl md:text-6xl font-black leading-tight text-brownText break-keep">
+                    MBTI "P" 들의<br>
+                    <span class="bg-yellowPoint px-2 inline-block transform rotate-1 border-2 border-dashed border-brownText rounded-lg my-1 whitespace-nowrap"><span id="typingText"></span><span id="typingCursor" class="inline-block w-[3px] bg-brownText ml-0.5 align-middle" style="height:0.85em;"></span></span>
+                </h1>
+            </div>
+
+            <!-- 히어로 그래픽 영역 (귀여운 입체 다이어리/사진 느낌 일러스트) -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative w-full max-w-[320px] bg-tapePink border-4 border-brownText p-5 rounded-2xl shadow-retro transform rotate-2">
+                    <!-- 테이프 장식 -->
+                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 rotate-12 bg-[#FFE082]/80 border-l border-r border-dashed border-brownText w-24 h-6"></div>
+                    
+                    <div class="bg-white border-2 border-brownText rounded-lg p-3 space-y-4">
+                        <div class="border border-brownText rounded overflow-hidden relative">
+                            <!-- 실제 전송받은 비행기 날개 및 구름 사진으로 교체 -->
+                            <img src="1.jpeg" alt="오사카 여행기 비행기 창가 풍경" class="w-full h-auto block">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. INTRODUCTION / TARGET MESSAGE -->
+    <section id="about" class="container mx-auto px-4 py-12 max-w-5xl">
+        <div class="bg-white border-4 border-brownText rounded-3xl p-6 md:p-10 shadow-retro relative">
+            <!-- 아날로그 편지봉투 느낌 탑 테이프 -->
+            <div class="absolute -top-4 left-10 bg-tapePink border-2 border-brownText px-4 py-1 text-sm font-handwriting font-bold -rotate-2">
+                ✉️ 'J' 친구들에게
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-4">
+                <div class="md:col-span-8 space-y-4">
+                    <h2 class="text-2xl md:text-3xl font-black">
+                        계획이 틀어지는 것에 스트레스 받고 계신가요?
+                    </h2>
+                    <p class="text-base md:text-lg text-brownLight leading-relaxed break-keep">
+                        여행 중 비를 고스란히 맞거나, 길을 잃어 계획한 식당에 가지 못하거나,<br class="pc_br"> 물건을 잃어버렸을 때 속상해서 남은 일정을 다 망치지는 않나요? <br class="pc_br"> 사카 3박 4일 여행 동안 그 모든 최악(?)의 시나리오를 고스란히 겪었습니다.
+                    </p>
+                    <p class="text-base md:text-lg font-semibold text-brownText leading-relaxed break-keep">
+                        하지만 기억에 가장 남는 진짜 추억들은 예상 밖의 우연들이었습니다. 생생한 고생담과 즉흥적인 모험기를 보며 대리만족과 함께 '계획'을 잠깐 내려놓아보세요!
+                    </p>
+                </div>
+                <div class="md:col-span-4 bg-beige border-2 border-brownText p-5 rounded-2xl space-y-3 shadow-inner">
+                    <h4 class="font-bold text-lg flex items-center gap-2">
+                        💡 P 여행 법칙
+                    </h4>
+                    <ul class="space-y-2 text-sm font-handwriting text-xl text-brownLight">
+                        <li class="flex items-start gap-2">📌 가고 싶은 곳은 <br class="pc_br"> '그때 가서' 찾는다.</li>
+                        <li class="flex items-start gap-2">📌 하고싶은게 생기면 <br class="pc_br">   그냥 해본다.</li>
+                        <li class="flex items-start gap-2">📌 식당을 못 찾겠으면 <br class="pc_br"> 보이는 식당에 간다.</li>
+                        <li class="flex items-start gap-2">📌 여권을 잃어버려도.. <br class="pc_br">    어떻게든 집엔 간다!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+    <!-- 4. STORY TIMELINE (시간 순서형 타임라인) -->
+    <section id="timeline" class="container mx-auto px-4 py-12 max-w-5xl">
+        <div class="text-center mb-16">
+            <span class="bg-tapePink text-brownText border-2 border-brownText px-4 py-1.5 rounded-full font-handwriting text-lg md:text-xl rotate-[-2deg] inline-block font-bold">
+                🗺️ 우당탕탕 3박 4일 타임라인
+            </span>
+        </div>
+
+        <div class="relative border-l-4 border-dashed border-brownText ml-4 md:ml-12 pl-6 md:pl-12 space-y-16">
+            
+            <!-- DAY 1 -->
+            <div class="relative">
+                <div class="absolute -left-[54px] md:-left-[78px] top-0 w-14 h-14 md:w-20 md:h-20 bg-white border-4 border-brownText rounded-2xl flex flex-col justify-center items-center shadow-retro-sm">
+                    <span class="font-handwriting text-base md:text-xl font-bold text-brownLight leading-none">DAY</span>
+                    <span class="font-handwriting text-2xl md:text-3xl font-black text-brownText leading-none">1</span>
+                </div>
+
+                <div class="bg-white border-4 border-brownText p-6 md:p-8 rounded-3xl shadow-retro space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">☔ 비 내리는 야경</span>
+                        <span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">🍜 밤 11시의 라면</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-black">비 내리는 야경과 야식 라멘</h3>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-beige border-2 border-brownText p-1.5 rounded-xl overflow-hidden">
+                            <img src="2.jpeg" alt="비 내리는 오사카 야경" class="w-full h-auto block rounded-lg">
+                        </div>
+                        <div class="bg-beige border-2 border-brownText p-1.5 rounded-xl overflow-hidden">
+                            <img src="3.jpeg" alt="밤 11시 돈코츠 라멘" class="w-full h-auto block rounded-lg">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                        <div class="md:col-span-12 space-y-3 font-handwriting text-2xl text-brownLight leading-relaxed">
+                            <p class="break-keep">
+                                비가 오지만 아무생각 없이 전망대로 향한 우리. <br class="pc_br">"전망대 규정상 우산을 쓸 수 없으십니다..." 라는 직원의 말. <br class="pc_br">결국 우린 온몸으로 비를 흠뻑 맞아 생쥐 꼴이 되었지만, 빗물 속에 번져나간 <br class="pc_br">도시의 야경은 정말 잊지 못할 찰나의 영화 속 한 장면 같았다! <br class="pc_br">
+                                돌아오니 저녁 9시가 훌쩍 넘은 시간. 라멘집에 들어갔더니 무려 2시간 웨이팅... <br class="pc_br">밤 11시에 삼킨 뜨끈하고 기름진 돈코츠 라멘은 평생 잊지 못할거다!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 2 -->
+            <div class="relative">
+                <div class="absolute -left-[54px] md:-left-[78px] top-0 w-14 h-14 md:w-20 md:h-20 bg-white border-4 border-brownText rounded-2xl flex flex-col justify-center items-center shadow-retro-sm">
+                    <span class="font-handwriting text-base md:text-xl font-bold text-brownLight leading-none">DAY</span>
+                    <span class="font-handwriting text-2xl md:text-3xl font-black text-brownText leading-none">2</span>
+                </div>
+
+                <div class="bg-white border-4 border-brownText p-6 md:p-8 rounded-3xl shadow-retro space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="bg-yellowPoint/40 text-brownText text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">⛵ 도톤보리 크루즈</span>
+                        <span class="bg-pink-100 text-pink-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">📸 스티커 사진</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-black">가고싶은데로, 하고싶은데로</h3>
+
+                    <div class="bg-beige border-2 border-brownText p-1.5 rounded-xl overflow-hidden max-w-[50%] mx-auto">
+                        <img src="4.jpeg" alt="도톤보리 글리코 간판" class="w-full h-auto block rounded-lg">
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                        <div class="md:col-span-12 space-y-3 font-handwriting text-2xl text-brownLight leading-relaxed">
+                            <p class="break-keep">
+                                도톤보리 강변을 실실 걸어가다 강 위에 다니는 배를 마주쳤다.<br class="pc_br"> "어라? 저거 타볼까?" "좋아!"
+                               매표소로 냅다 달려가 배 표를 샀다. <br class="pc_br">물 위에서 맞이한 오사카의 시원한 바람,
+                                다리 위에서 열심히 손을 흔들어주던 사람들의 미소는 이번 여행 중에서 가장 재미있고 행복한 경험였다. <br class="pc_br">
+                                스티커 사진기를 발견해 무작정 사진부터 찍은 우리는 기계 작동법도 온통 일본어라 <br class="pc_br">땀만 흘리고 있는데,
+                                 옆 부스에서 우릴 보던 일본인 친구가 다가왔다. <br class="pc_br">출력 방법을 알려주며 겨우 완성된 우스꽝스러운 외계인 얼굴 사진은 우리의 평생 이야깃거가 되었다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 3 -->
+            <div class="relative">
+                <div class="absolute -left-[54px] md:-left-[78px] top-0 w-14 h-14 md:w-20 md:h-20 bg-white border-4 border-brownText rounded-2xl flex flex-col justify-center items-center shadow-retro-sm">
+                    <span class="font-handwriting text-base md:text-xl font-bold text-brownLight leading-none">DAY</span>
+                    <span class="font-handwriting text-2xl md:text-3xl font-black text-brownText leading-none">3</span>
+                </div>
+
+                <div class="bg-white border-4 border-brownText p-6 md:p-8 rounded-3xl shadow-retro space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">🍣 로컬 초밥의 행운</span>
+                        <span class="bg-red-100 text-red-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">🚨 여권 분실 비상</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-black">길가다 발견한 초밥집, 그리고 여권 분실 사건</h3>
+
+                    <div class="bg-beige border-2 border-brownText p-1.5 rounded-xl overflow-hidden max-w-[50%] mx-auto">
+                        <img src="5.jpeg" alt="길가다 발견한 초밥집" class="w-full h-auto block rounded-lg">
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                        <div class="md:col-span-12 space-y-3 font-handwriting text-2xl text-brownLight leading-relaxed">
+                            <p class="break-keep">
+                                계획했던 식당에 가다 길 잃은 우리는 쿨하게 포기하고 앞에 보이는 초밥집에 들어갔다. <br class="pc_br">
+                                놀랍게도 그곳 아르바이트 직원이 한국어를 무척 잘했고, <br class="pc_br">
+                                그의 추천으로 시킨 도톰한 회가 올라간 초밥과 음식들은 성공이었다. <br class="pc_br">하지만 행복은 거기까지였다... <br class="pc_br">
+                                늦은 밤 숙소에 도착해 가방을 정리하던 친구의 외마디 비명. 
+                                <br class="pc_br">"여... 여권이 없어!!" 기억을 더듬어보니 디즈니랜드에 두고 온 것이었다.<br class="pc_br">
+                                 수많은 상상들이 머릿속을 강타했다. 내일 귀국인데!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 4 -->
+            <div class="relative">
+                <div class="absolute -left-[54px] md:-left-[78px] top-0 w-14 h-14 md:w-20 md:h-20 bg-white border-4 border-brownText rounded-2xl flex flex-col justify-center items-center shadow-retro-sm">
+                    <span class="font-handwriting text-base md:text-xl font-bold text-brownLight leading-none">DAY</span>
+                    <span class="font-handwriting text-2xl md:text-3xl font-black text-brownText leading-none">4</span>
+                </div>
+
+                <div class="bg-white border-4 border-brownText p-6 md:p-8 rounded-3xl shadow-retro space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="bg-red-100 text-red-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">🏋️‍♀️ 계단 지옥</span>
+                        <span class="bg-purple-100 text-purple-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">🚆 기차 지연 대동란</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-black">계단 지옥, 기차 지연</h3>
+
+                    <div class="bg-beige border-2 border-brownText p-1.5 rounded-xl overflow-hidden">
+                        <img src="6.jpeg" alt="공항 특급열차 하루카" class="w-full h-auto block rounded-lg">
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                        <div class="md:col-span-12 space-y-3 font-handwriting text-2xl text-brownLight leading-relaxed">
+                            <p class="break-keep">
+                                여권을 되찾고, 남은 소중한 2시간 동안 우리는 교토에서 미친 듯이 돌아다녔다. <br class="pc_br">
+                                2시간 뿐이였지만, 정말 알차게 관광했다! <br class="pc_br">
+                                구경을 마치고 공항 가는 특급 기차를 간신히 탔으나, 중간에 갑자기 기차가 30분 멈춰 서는 대참사 발생! <br class="pc_br">
+                                기차 속에서 비행기 놓칠 생각에 손발이 떨렸지만, 도착하자마자 질주하여 탑승해서 집으로 돌아올 수 있었다.
+                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. DIAGNOSE (INTERACTIVE GAME/WIDGET) -->
+    <section id="diagnose" class="container mx-auto px-4 py-12 max-w-5xl">
+        <div class="bg-white border-4 border-brownText rounded-3xl p-6 md:p-10 shadow-retro relative overflow-hidden">
+            <!-- 배경 데코 라인 -->
+            <div class="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-y-10 translate-x-10">
+                <span class="text-[200px] leading-none select-none">🔮</span>
+            </div>
+
+            <div class="max-w-2xl mx-auto text-center space-y-6">
+                <!-- 상단 뱃지 꼬리표 (계속 보이게 완전히 고정) -->
+                <div class="inline-block bg-coralAlert text-white border-2 border-brownText px-4 py-1.5 rounded-full font-handwriting text-xl font-bold">
+                    당신의 계획 스트레스는?
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black">즉흥 수치 진단 연구소</h2>
+                <p class="text-brownLight font-handwriting text-2xl">
+                    간단한 테스트를 통해 부적을 뽑아보세요!
+                </p>
+
+                <!-- 진단 질문 폼 -->
+                <div class="bg-beige border-4 border-brownText p-6 rounded-2xl shadow-retro-sm text-left space-y-6">
+                    <div class="space-y-2">
+                        <label class="font-bold block text-lg">Q1. 가려던 인생 맛집이 오늘 하필 정기휴무라면?</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <button onclick="selectAnswer('q1', 30, this)" class="q1-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                😭 속상하고 멘탈이 흔들려 우울해진다.
+                            </button>
+                            <button onclick="selectAnswer('q1', 10, this)" class="q1-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                📱 즉시 차선책 리스트 2안을 꺼낸다.
+                            </button>
+                            <button onclick="selectAnswer('q1', 0, this)" class="q1-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                😎 "에라이 바로 앞 식당 아무 데나 가자!"
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="font-bold block text-lg">Q2. 이번 여행의 일정 계획표는 어느 수준인가요?</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <button onclick="selectAnswer('q2', 40, this)" class="q2-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                📊 구글 맵, 동선, 시간 분 단위 엑셀 완비!
+                            </button>
+                            <button onclick="selectAnswer('q2', 20, this)" class="q2-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                🗺️ 가고 싶은 핫플 4-5개랑 동선만 확보.
+                            </button>
+                            <button onclick="selectAnswer('q2', 0, this)" class="q2-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                🎟️ 항공권이랑 숙소만 일단 끝! 가서 생각함.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="font-bold block text-lg">Q3. 여행 중 갑작스러운 폭우가 쏟아져 온몸이 다 젖는다면?</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <button onclick="selectAnswer('q3', 30, this)" class="q3-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                🌧️ 옷 다 젖어 불쾌하고 일정이 취소돼 분노한다.
+                            </button>
+                            <button onclick="selectAnswer('q3', 15, this)" class="q3-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                ☕ 근처 실내 카페나 몰로 급히 대피한다.
+                            </button>
+                            <button onclick="selectAnswer('q3', 0, this)" class="q3-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                🤪 "우와 미쳤다! 비 맞으며 그냥 걸어!"
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-center pt-2">
+                        <button onclick="calculateStress()" class="bg-yellowPoint hover:bg-[#FFD54F] border-4 border-brownText text-brownText font-bold text-lg px-8 py-4 rounded-2xl shadow-retro hover:shadow-retro-active hover:translate-x-[4px] hover:translate-y-[4px] transition-all">
+                            즉흥 수치 확인 및 부적 뽑기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 진단 결과 모달/출력 영역 -->
+                <div id="resultArea" class="hidden bg-tapePink border-4 border-brownText p-6 rounded-2xl shadow-retro text-left space-y-4">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl" id="resultEmoji">🔬</span>
+                        <div>
+                            <h3 class="font-black text-2xl" id="resultTitle">자가진단 검진표</h3>
+                            <p class="font-handwriting text-lg text-brownLight">당신의 영혼에 흐르는 즉흥 수치 결과</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 커스텀 바 -->
+                    <div class="w-full bg-white border-2 border-brownText h-6 rounded-full overflow-hidden relative">
+                        <div id="resultProgressBar" class="h-full bg-coralAlert transition-all duration-1000" style="width: 0%;"></div>
+                        <span id="resultProgressText" class="absolute inset-0 flex justify-center items-center text-xs font-bold text-brownText">0%</span>
+                    </div>
+
+                    <div class="bg-white border-2 border-brownText p-4 rounded-xl space-y-2">
+                        <p class="font-semibold text-lg" id="resultDesc">불러오는 중...</p>
+                        <div class="border-t border-dashed border-brownText pt-2">
+                            <span class="text-xs text-white bg-brownText font-bold px-2 py-0.5 rounded uppercase">P-PRESCRIPTION</span>
+                            <p class="mt-1 text-sm font-handwriting text-lg text-brownLight" id="resultPrescription">
+                                진단서 결과
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 즉흥 부적 이미지 발급 -->
+                    <div id="talismanBox" class="bg-white border-4 border-dashed border-[#FFE082] p-4 rounded-xl flex flex-col items-center justify-center text-center space-y-2">
+                        <span class="font-handwriting text-2xl font-bold text-coralAlert">🔮 오늘의 부적 🔮</span>
+                        <div id="talismanImage" class="text-5xl my-2">🎟️</div>
+                        <p class="font-bold text-lg" id="talismanName">길가다 그냥 들어간 식당이 인생 맛집이 되는 부적</p>
+                        <p class="text-xs text-brownLight">화면을 캡처하여 스트레스 받을 때 꺼내 보세요.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. OTHER MEMORIES GALLERY -->
+    <section id="gallery" class="container mx-auto px-4 py-12 max-w-5xl">
+        <div class="bg-white border-4 border-brownText rounded-3xl p-6 md:p-10 shadow-retro relative">
+            <div class="text-center mb-10">
+                <span class="text-4xl">🍡</span>
+                <h2 class="text-3xl font-black mt-2">그 밖의 여행 속에서</h2>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
+                <!-- Gallery 1 -->
+                <div class="group bg-beige border-2 border-brownText p-2 rounded-xl transform hover:scale-105 hover:rotate-1 transition-all shadow-retro-sm flex items-center justify-center">
+                    <img src="7.jpeg" alt="여행 속 소소한 순간" class="w-full h-auto block rounded">
+                </div>
+                <!-- Gallery 2 -->
+                <div class="group bg-beige border-2 border-brownText p-2 rounded-xl transform hover:scale-105 hover:-rotate-1 transition-all shadow-retro-sm flex items-center justify-center">
+                    <img src="8.jpeg" alt="여행 속 소소한 순간" class="w-full h-auto block rounded">
+                </div>
+                <!-- Gallery 3 -->
+                <div class="group bg-beige border-2 border-brownText p-2 rounded-xl transform hover:scale-105 hover:rotate-2 transition-all shadow-retro-sm flex items-center justify-center">
+                    <img src="9.jpeg" alt="오사카성" class="w-full h-auto block rounded">
+                </div>
+                <!-- Gallery 4 -->
+                <div class="group bg-beige border-2 border-brownText p-2 rounded-xl transform hover:scale-105 hover:-rotate-2 transition-all shadow-retro-sm flex items-center justify-center">
+                    <img src="10.jpeg" alt="교토 사찰" class="w-full h-auto block rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. EPILOGUE & CTA FOOTER -->
+    <footer class="container mx-auto px-4 py-16 max-w-5xl">
+        <div class="bg-yellowPoint border-4 border-brownText p-8 md:p-12 rounded-3xl text-center space-y-6 shadow-retro relative overflow-hidden">
+            <!-- 스프링 줄무늬 장식 효과 -->
+            <div class="absolute left-0 right-0 top-0 h-4 bg-white border-b-4 border-brownText"></div>
+
+            <span class="text-5xl inline-block swinging">🕊️</span>
+            <h2 class="text-3xl md:text-4xl font-black">완벽하지 않아서 완벽했던 여행</h2>
+            
+            <p class="font-handwriting text-2xl text-brownText max-w-2xl mx-auto leading-relaxed break-keep">
+                J 친구 여러분! <br class="pc_br">
+                완벽한 계획대로 흐르지 않았다고 해서 실망할 이유가 없습니다. <br class="pc_br">
+                오히려 그 우연함과 유연함 속에서 <br class="pc_br">보물 같은 명장면이 불쑥 튀어 나올 테니까요. <br class="pc_br">
+                가끔은 몸과 마음이 흘러가는 대로 즉흥 여행의 낭만을 떠나보세요!
+            </p>
+
+            <div class="border-t-2 border-dashed border-brownText/40 pt-6">
+                <p class="font-handwriting text-lg text-brownLight font-bold">
+                    © MBTI 'P' 둘의 오사카 대소동 다이어리.
+                </p>
+                <p class="text-xs text-brownLight mt-1">
+                    우린 살아남았고, 다음엔 어디로 길을 잃을지 행복한 고민 중입니다!
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 배경 은은한 파티클(반짝이) 효과
+        (function() {
+            const canvas = document.getElementById('bgParticles');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            // 노란 계열 위주 + 포인트로 핑크 살짝
+            const colors = ['#FFE082', '#FFE082', '#FFD54F', '#FFCA28', '#FFD1DC'];
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            function createParticles() {
+                const count = Math.floor((canvas.width * canvas.height) / 20000);
+                particles = [];
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        r: Math.random() * 3 + 2.5,
+                        speedY: Math.random() * 0.25 + 0.08,
+                        wobble: Math.random() * Math.PI * 2,
+                        wobbleSpeed: Math.random() * 0.015 + 0.005,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        alpha: Math.random() * 0.3 + 0.45,
+                        shape: Math.random() < 0.45 ? 'star' : 'circle',
+                        twinklePhase: Math.random() * Math.PI * 2,
+                        twinkleSpeed: Math.random() * 0.03 + 0.02
+                    });
+                }
+            }
+
+            function init() {
+                resizeCanvas();
+                createParticles();
+            }
+            window.addEventListener('resize', init);
+            init();
+
+            // 귀여운 반짝이(스파클) 모양 그리기
+            function drawSparkle(x, y, size, color, alpha) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.moveTo(0, -size);
+                ctx.quadraticCurveTo(size * 0.18, -size * 0.18, size, 0);
+                ctx.quadraticCurveTo(size * 0.18, size * 0.18, 0, size);
+                ctx.quadraticCurveTo(-size * 0.18, size * 0.18, -size, 0);
+                ctx.quadraticCurveTo(-size * 0.18, -size * 0.18, 0, -size);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.y -= p.speedY;
+                    p.wobble += p.wobbleSpeed;
+                    p.x += Math.sin(p.wobble) * 0.25;
+                    p.twinklePhase += p.twinkleSpeed;
+                    const twinkleAlpha = p.alpha * (0.55 + 0.45 * Math.sin(p.twinklePhase));
+                    if (p.y < -10) {
+                        p.y = canvas.height + 10;
+                        p.x = Math.random() * canvas.width;
+                    }
+                    if (p.shape === 'star') {
+                        drawSparkle(p.x, p.y, p.r * 1.9, p.color, twinkleAlpha);
+                    } else {
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color;
+                        ctx.globalAlpha = twinkleAlpha;
+                        ctx.fill();
+                    }
+                });
+                ctx.globalAlpha = 1;
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+        // 히어로 타이틀 타이핑 효과
+        function typeText(el, text, speed) {
+            let i = 0;
+            function step() {
+                if (i <= text.length) {
+                    el.textContent = text.slice(0, i);
+                    i++;
+                    setTimeout(step, speed);
+                }
+            }
+            step();
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            const typingEl = document.getElementById('typingText');
+            if (typingEl) typeText(typingEl, '우당탕탕 여행기', 150);
+        });
+
+        // 스크롤 진행률 상단바 업데이트
+        function updateScrollProgress() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            const bar = document.getElementById('scrollProgressBar');
+            if (bar) bar.style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateScrollProgress);
+        window.addEventListener('resize', updateScrollProgress);
+        updateScrollProgress();
+
+        // 전역 상태 변수들
+        const answers = {
+            q1: null,
+            q2: null,
+            q3: null
+        };
+
+        // 1일차 미리보기 캐러셀 관련 상태 변수 및 함수
+        let currentDay1Slide = 0;
+        const totalDay1Slides = 2;
+
+        function updateDay1Carousel() {
+            const carousel = document.getElementById('day1-carousel');
+            if (carousel) {
+                carousel.style.transform = `translateX(-${currentDay1Slide * 100}%)`;
+            }
+        }
+
+        function prevDay1Slide(event) {
+            event.stopPropagation(); // 카드 자체 클릭 혹은 링크 방해 차단
+            currentDay1Slide = (currentDay1Slide - 1 + totalDay1Slides) % totalDay1Slides;
+            updateDay1Carousel();
+        }
+
+        function nextDay1Slide(event) {
+            event.stopPropagation();
+            currentDay1Slide = (currentDay1Slide + 1) % totalDay1Slides;
+            updateDay1Carousel();
+        }
+
+        // 답변 선택 처리 및 스타일 업데이트
+        function selectAnswer(question, score, element) {
+            answers[question] = score;
+
+            // 해당 질문군 버튼들의 하이라이트 초기화
+            const buttons = document.querySelectorAll(`.${question}-btn`);
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-yellowPoint', 'border-4');
+                btn.classList.add('bg-white', 'border-2');
+            });
+
+            // 선택된 버튼 활성화 스타일링
+            element.classList.remove('bg-white', 'border-2');
+            element.classList.add('bg-yellowPoint', 'border-4');
+        }
+
+        // 스트레스 계산 및 결과 노출
+        function calculateStress() {
+            // 모든 질문에 답변했는지 검증
+            if (answers.q1 === null || answers.q2 === null || answers.q3 === null) {
+                const messageBox = document.createElement('div');
+                messageBox.className = 'fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-coralAlert text-white border-2 border-brownText p-4 rounded-xl shadow-retro font-bold text-center';
+                messageBox.innerHTML = '⚠️ 아직 선택하지 않은 검진 질문이 있어요!';
+                document.body.appendChild(messageBox);
+                setTimeout(() => messageBox.remove(), 3000);
+                return;
+            }
+
+            const totalScore = answers.q1 + answers.q2 + answers.q3; // 0점 ~ 100점 분포
+            const resultArea = document.getElementById('resultArea');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultEmoji = document.getElementById('resultEmoji');
+            const resultDesc = document.getElementById('resultDesc');
+            const resultPrescription = document.getElementById('resultPrescription');
+            const resultProgressBar = document.getElementById('resultProgressBar');
+            const resultProgressText = document.getElementById('resultProgressText');
+            
+            const talismanImage = document.getElementById('talismanImage');
+            const talismanName = document.getElementById('talismanName');
+
+            // 숨김 영역 노출 및 스크롤 이동
+            resultArea.classList.remove('hidden');
+            resultArea.scrollIntoView({ behavior: 'smooth' });
+
+            // 프로그레스 바 충전 애니메이션 연출을 위해 타임아웃 부여
+            setTimeout(() => {
+                resultProgressBar.style.width = `${totalScore}%`;
+                resultProgressText.innerText = `${totalScore}%`;
+            }, 100);
+
+            // 스코어별 분류 및 부적 무작위성 가미
+            let title = "";
+            let emoji = "";
+            let desc = "";
+            let prescription = "";
+            
+            // 부적 셋업 후보군
+            const talismans = [
+                { emoji: "🍣", name: "길을 잃어야만 만나는 인생 초밥 행운 부적" },
+                { emoji: "🍜", name: "고생 후에 낙이온다! 밤 11시 인생 라멘 부적" },
+                { emoji: "⛵", name: "계획없어도 괜찮아! 길가다 만나는 리버크루즈 부적" },
+                { emoji: "🎫", name: "서로 언어가 안통해도 눈빛만으로 목적지를 찾아내는 프리패스 부적" },
+                { emoji: "👭", name: "말 한마디 안 통해도 날 도와주는 일본인 친구 부적" },
+                { emoji: "🏃‍♀️", name: "아슬아슬 늦어도 비행기 문 닫히기 직전 세이프 하는 공항 초스피드 질주 부적" }
+            ];
+
+            const selectedTalisman = talismans[Math.floor(Math.random() * talismans.length)];
+
+            if (totalScore >= 75) {
+                title = "완전 J! 완벽주의 'J'";
+                emoji = "🚨";
+                desc = "작은 돌발 상황에도 깊은 분노와 좌절을 느낄 위험이 매우 큽니다. 당신의 여행은 가슴 뛰는 휴식입니다!";
+                prescription = "즉시 여행 계획표의 50%를 공백으로 남겨두고, 비 내리는 오사카성 구경 도중 길 잃기 1회를 처방합니다.";
+            } else if (totalScore >= 40) {
+                title = "안정권! 유연한 'J'";
+                emoji = "📋";
+                desc = "계획을 철저히 짜며 마음의 평안을 얻으시나, 어쩔 수 없는 위기 상황에서는 겉은 떨려도 속으로는 유연한 대처를 하실 수 있는 여행자입니다.";
+                prescription = "다음 오사카 여행 시에는 오로지 눈앞의 예쁜 골목으로만 빠져드는 골목 침투술을 처방합니다.";
+            } else {
+                title = "자유로운 영혼! 뼛속까지 'P' ";
+                emoji = "🎒";
+                desc = "당신은 이미 우당탕탕 여행의 끝판왕! 어떠한 기차 연착이나 폭우, 여권 분실 앞에서도 '하하 어쩌겠어 어떻게든 되겠지!'하며 무한의 낙천주의 에너지를 발동합니다.";
+                prescription = "앞으로도 세상을 향해 대책 없는 낭만을 전파하여 전 세계 J들에게 이런 여행이 있다는 것을 알려주세요!";
+            }
+
+            resultTitle.innerText = title;
+            resultEmoji.innerText = emoji;
+            resultDesc.innerText = desc;
+            resultPrescription.innerText = prescription;
+
+            // 부적 렌더링
+            talismanImage.innerText = selectedTalisman.emoji;
+            talismanName.innerText = selectedTalisman.name;
+        }
+    </script>
+</body>
+</html>
