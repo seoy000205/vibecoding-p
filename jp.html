@@ -93,6 +93,14 @@
         #scrollProgressBar {
             transition: width 0.1s ease-out;
         }
+        /* 타이핑 효과 커서 깜빡임 */
+        @keyframes blink-caret {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        #typingCursor {
+            animation: blink-caret 0.8s step-end infinite;
+        }
     </style>
 </head>
 <body class="grid-bg min-h-screen relative overflow-x-hidden selection:bg-yellowPoint selection:text-brownText">
@@ -125,7 +133,7 @@
             <div class="lg:col-span-7 space-y-6 pt-4">
                 <h1 class="text-4xl md:text-6xl font-black leading-tight text-brownText break-keep">
                     MBTI "P" 들의<br>
-                    <span class="bg-yellowPoint px-2 inline-block transform rotate-1 border-2 border-dashed border-brownText rounded-lg my-1">우당탕탕 여행기</span>
+                    <span class="bg-yellowPoint px-2 inline-block transform rotate-1 border-2 border-dashed border-brownText rounded-lg my-1 whitespace-nowrap"><span id="typingText"></span><span id="typingCursor" class="inline-block w-[3px] bg-brownText ml-0.5 align-middle" style="height:0.85em;"></span></span>
                 </h1>
             </div>
 
@@ -498,6 +506,23 @@
     </footer>
 
     <script>
+        // 히어로 타이틀 타이핑 효과
+        function typeText(el, text, speed) {
+            let i = 0;
+            function step() {
+                if (i <= text.length) {
+                    el.textContent = text.slice(0, i);
+                    i++;
+                    setTimeout(step, speed);
+                }
+            }
+            step();
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            const typingEl = document.getElementById('typingText');
+            if (typingEl) typeText(typingEl, '우당탕탕 여행기', 150);
+        });
+
         // 스크롤 진행률 상단바 업데이트
         function updateScrollProgress() {
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
