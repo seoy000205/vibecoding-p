@@ -105,6 +105,9 @@
 </head>
 <body class="grid-bg min-h-screen relative overflow-x-hidden selection:bg-yellowPoint selection:text-brownText">
 
+    <!-- 배경 은은한 파티클 효과 -->
+    <canvas id="bgParticles" class="fixed inset-0 w-full h-full pointer-events-none -z-10"></canvas>
+
     <!-- 스크롤 진행률 상단바 -->
     <div class="fixed top-0 left-0 w-full h-2 bg-white/50 z-[60] border-b-2 border-brownText">
         <div id="scrollProgressBar" class="h-full bg-yellowPoint" style="width: 0%;"></div>
@@ -120,7 +123,7 @@
             <div class="flex gap-3 md:gap-6 font-handwriting text-lg md:text-xl">
                 <a href="#about" class="hover:underline transition-all">스토리</a>
                 <a href="#timeline" class="hover:underline transition-all">타임라인</a>
-                <a href="#diagnose" class="hover:underline transition-all">테스트</a>
+                <a href="#diagnose" class="hover:underline transition-all">즉흥도 테스트</a>
                 <a href="#gallery" class="hover:underline transition-all">갤러리</a>
             </div>
         </nav>
@@ -506,6 +509,92 @@
     </footer>
 
     <script>
+        // 배경 은은한 파티클(반짝이) 효과
+        (function() {
+            const canvas = document.getElementById('bgParticles');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            // 노란 계열 위주 + 포인트로 핑크 살짝
+            const colors = ['#FFE082', '#FFE082', '#FFD54F', '#FFCA28', '#FFD1DC'];
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            function createParticles() {
+                const count = Math.floor((canvas.width * canvas.height) / 20000);
+                particles = [];
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        r: Math.random() * 3 + 2.5,
+                        speedY: Math.random() * 0.25 + 0.08,
+                        wobble: Math.random() * Math.PI * 2,
+                        wobbleSpeed: Math.random() * 0.015 + 0.005,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        alpha: Math.random() * 0.3 + 0.45,
+                        shape: Math.random() < 0.45 ? 'star' : 'circle',
+                        twinklePhase: Math.random() * Math.PI * 2,
+                        twinkleSpeed: Math.random() * 0.03 + 0.02
+                    });
+                }
+            }
+
+            function init() {
+                resizeCanvas();
+                createParticles();
+            }
+            window.addEventListener('resize', init);
+            init();
+
+            // 귀여운 반짝이(스파클) 모양 그리기
+            function drawSparkle(x, y, size, color, alpha) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.moveTo(0, -size);
+                ctx.quadraticCurveTo(size * 0.18, -size * 0.18, size, 0);
+                ctx.quadraticCurveTo(size * 0.18, size * 0.18, 0, size);
+                ctx.quadraticCurveTo(-size * 0.18, size * 0.18, -size, 0);
+                ctx.quadraticCurveTo(-size * 0.18, -size * 0.18, 0, -size);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.y -= p.speedY;
+                    p.wobble += p.wobbleSpeed;
+                    p.x += Math.sin(p.wobble) * 0.25;
+                    p.twinklePhase += p.twinkleSpeed;
+                    const twinkleAlpha = p.alpha * (0.55 + 0.45 * Math.sin(p.twinklePhase));
+                    if (p.y < -10) {
+                        p.y = canvas.height + 10;
+                        p.x = Math.random() * canvas.width;
+                    }
+                    if (p.shape === 'star') {
+                        drawSparkle(p.x, p.y, p.r * 1.9, p.color, twinkleAlpha);
+                    } else {
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color;
+                        ctx.globalAlpha = twinkleAlpha;
+                        ctx.fill();
+                    }
+                });
+                ctx.globalAlpha = 1;
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
         // 히어로 타이틀 타이핑 효과
         function typeText(el, text, speed) {
             let i = 0;
