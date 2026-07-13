@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계획대로 안 돼도 괜찮아! 오사카 즉흥 여행기</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Gaegu (귀여운 손글씨), Gowun Dodum (깔끔하고 둥근 고딕) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        beige: '#FDFBF7',
+                        yellowPoint: '#FFE082',
+                        brownText: '#4E342E',
+                        brownLight: '#8D6E63',
+                        coralAlert: '#FF8A65',
+                        tapePink: '#FFD1DC',
+                        tapeGreen: '#C8E6C9'
+                    },
+                    fontFamily: {
+                        hand: ['Gaegu', 'cursive'],
+                        body: ['Gowun Dodum', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'retro': '6px 6px 0px 0px #4E342E',
+                        'retro-sm': '3px 3px 0px 0px #4E342E',
+                        'retro-lg': '10px 10px 0px 0px #4E342E',
+                        'retro-active': '2px 2px 0px 0px #4E342E'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Gowun Dodum', sans-serif;
+            background-color: #FDFBF7;
+            color: #4E342E;
+        }
+        .font-handwriting {
+            font-family: 'Gaegu', cursive;
+        }
+        /* 커스텀 일기장 모눈종이 패턴 배경 효과 */
+        .grid-bg {
+            background-size: 24px 24px;
+            background-image: linear-gradient(to right, rgba(78, 52, 46, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(78, 52, 46, 0.05) 1px, transparent 1px);
+        }
+        /* 아날로그 테이프 느낌 스타일 */
+        .tape-effect {
+            position: relative;
+        }
+        .tape-effect::after {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-3deg);
+            width: 80px;
+            height: 24px;
+            background-color: rgba(255, 224, 130, 0.7);
+            border-left: 2px dashed rgba(78, 52, 46, 0.3);
+            border-right: 2px dashed rgba(78, 52, 46, 0.3);
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        /* 커스텀 애니메이션 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-1deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+        .floating-deco {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes swing {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        .swinging {
+            animation: swing 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="grid-bg min-h-screen relative overflow-x-hidden selection:bg-yellowPoint selection:text-brownText">
+
+    <!-- 데코용 떠다니는 스티커 요소들 (모바일 배제, 데스크톱 전용) -->
+    <div class="hidden lg:block absolute top-12 left-8 floating-deco pointer-events-none z-10">
+        <div class="bg-tapePink text-brownText border-2 border-brownText px-3 py-1 font-handwriting text-lg rotate-12 shadow-retro-sm rounded-sm">
+            ✈️ 무작정 티켓팅!
+        </div>
+    </div>
+    <div class="hidden lg:block absolute top-[450px] right-8 floating-deco pointer-events-none z-10" style="animation-delay: 1.5s;">
+        <div class="bg-yellowPoint text-brownText border-2 border-brownText px-4 py-2 font-handwriting text-xl -rotate-6 shadow-retro-sm rounded-md">
+            🍜 인생 라멘 맛본 날
+        </div>
+    </div>
+    <div class="hidden lg:block absolute top-[1200px] left-4 floating-deco pointer-events-none z-10" style="animation-delay: 0.7s;">
+        <div class="bg-tapeGreen text-brownText border-2 border-brownText p-3 rounded-full shadow-retro-sm">
+            <span class="text-3xl">🧭</span>
+        </div>
+    </div>
+    <div class="hidden lg:block absolute top-[2100px] right-6 floating-deco pointer-events-none z-10" style="animation-delay: 2s;">
+        <div class="bg-coralAlert text-white border-2 border-brownText px-3 py-1 font-handwriting text-lg rotate-6 shadow-retro-sm rounded-sm">
+            🚨 여권아 어딨니?!
+        </div>
+    </div>
+
+    <!-- 1. HERO SECTION -->
+    <header class="container mx-auto px-4 pt-10 pb-16 max-w-5xl">
+        <!-- 네비게이션 미니바 -->
+        <nav class="flex justify-between items-center mb-12 bg-white border-4 border-brownText p-4 rounded-2xl shadow-retro">
+            <a href="#" class="font-handwriting text-2xl font-bold flex items-center gap-2 text-brownText">
+                <span class="text-3xl swinging inline-block">🇯🇵</span> MBTI "P"의 대반란
+            </a>
+            <div class="flex gap-3 md:gap-6 font-handwriting text-lg md:text-xl">
+                <a href="#about" class="hover:underline transition-all">스토리</a>
+                <a href="#timeline" class="hover:underline transition-all">타임라인</a>
+                <a href="#diagnose" class="hover:underline transition-all">J를위한위젯</a>
+                <a href="#gallery" class="hover:underline transition-all">갤러리</a>
+            </div>
+        </nav>
+
+        <!-- 히어로 본문 디자인 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white border-4 border-brownText rounded-3xl p-6 md:p-10 shadow-retro relative overflow-hidden">
+            <!-- 내부 다이어리 스프링 배경 디자인 효과 -->
+            <div class="absolute left-0 right-0 top-0 h-4 bg-yellowPoint border-b-4 border-brownText"></div>
+            
+            <div class="lg:col-span-7 space-y-6 pt-4">
+                <div class="inline-block bg-yellowPoint text-brownText border-2 border-brownText px-3 py-1 rounded-full font-handwriting text-lg md:text-xl font-bold">
+                    💥 3박 4일 우당탕탕 리얼 여행기
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black leading-tight text-brownText break-keep">
+                    계획대로 안 돼도<br>
+                    <span class="bg-yellowPoint px-2 inline-block transform rotate-1 border-2 border-dashed border-brownText rounded-lg my-1">괜찮아!</span>
+                </h1>
+                <p class="font-handwriting text-xl md:text-2xl text-brownLight leading-relaxed">
+                    "가이드북은 비행기 타자마자 던져버렸다! MBTI 극단적 'P' 절친 둘이 떠나 몸소 겪은 실전 오사카 여행 시트콤. 우린 길을 잃었지만, 완벽한 낭만을 찾았지."
+                </p>
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <a href="#timeline" class="bg-[#FFE082] hover:bg-[#FFD54F] border-4 border-brownText text-brownText font-bold px-6 py-3 rounded-2xl shadow-retro hover:shadow-retro-active hover:translate-x-[4px] hover:translate-y-[4px] transition-all text-center">
+                        🏃‍♂️ 우당탕탕 타임라인 읽기
+                    </a>
+                    <a href="#diagnose" class="bg-white hover:bg-beige border-4 border-brownText text-brownText font-bold px-6 py-3 rounded-2xl shadow-retro hover:shadow-retro-active hover:translate-x-[4px] hover:translate-y-[4px] transition-all text-center">
+                        🩺 완벽주의 J 탈출 치료기
+                    </a>
+                </div>
+            </div>
+
+            <!-- 히어로 그래픽 영역 (귀여운 입체 다이어리/여권 느낌 일러스트) -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative w-full max-w-[320px] bg-tapePink border-4 border-brownText p-5 rounded-2xl shadow-retro transform rotate-2">
+                    <!-- 테이프 장식 -->
+                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 rotate-12 bg-[#FFE082]/80 border-l border-r border-dashed border-brownText w-24 h-6"></div>
+                    
+                    <div class="bg-white border-2 border-brownText rounded-lg p-3 space-y-4">
+                        <div class="bg-[#ECEFF1] border border-brownText rounded h-40 flex flex-col justify-center items-center relative overflow-hidden">
+                            <!-- 일본 배경을 연상시키는 귀여운 SVG (후지산/오사카성 간소화 일러스트) -->
+                            <svg class="w-24 h-24 text-brownText opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2m4-3.5a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="absolute bottom-2 font-handwriting text-lg bg-yellowPoint border border-brownText px-2 rounded-full">OSAKA ✈️</span>
+                        </div>
+                        <div class="space-y-1">
+                            <p class="font-handwriting text-sm text-brownLight">DOCUMENT NO. P-1004-99</p>
+                            <div class="flex justify-between items-center">
+                                <p class="font-bold text-lg">P형 인간들의 탑승권</p>
+                                <span class="bg-coralAlert text-white text-xs px-2 py-0.5 rounded border border-brownText">BOARDING</span>
+                            </div>
+                            <p class="text-xs text-brownLight">구속 없는 자들의 대책 없는 낭만 탈출기</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. INTRODUCTION / TARGET MESSAGE -->
+    <section id="about" class="container mx-auto px-4 py-12 max-w-5xl">
+        <div class="bg-white border-4 border-brownText rounded-3xl p-6 md:p-10 shadow-retro relative">
+            <!-- 아날로그 편지봉투 느낌 탑 테이프 -->
+            <div class="absolute -top-4 left-10 bg-tapePink border-2 border-brownText px-4 py-1 text-sm font-handwriting font-bold -rotate-2">
+                ✉️ 철저한 계획파 'J' 친구들에게 보내는 편지
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-4">
+                <div class="md:col-span-8 space-y-4">
+                    <h2 class="text-2xl md:text-3xl font-black">
+                        "여행 가기 전부터 엑셀로 일정 분 단위로 짜느라 머리 터지나요?"
+                    </h2>
+                    <p class="text-base md:text-lg text-brownLight leading-relaxed break-keep">
+                        여행 중 예상외의 비바람, 뜻하지 않은 상점 임시휴업, 혹은 길을 잃거나 물건을 잃어버렸을 때 속상해서 남은 일정을 다 망치지는 않나요? 
+                        저희는 이번 <strong class="bg-yellowPoint px-1 rounded">오사카 3박 4일 여행 동안</strong> 그 모든 최악(?)의 시나리오를 고스란히 겪었습니다.
+                    </p>
+                    <p class="text-base md:text-lg font-semibold text-brownText">
+                        하지만 다 지나고 보니, 우리의 기억을 가장 세게 치고 올라오는 진짜 '눈물 왈칵 추억'들은 계획표 밖의 우연들이었습니다. 저희의 생생한 고생담과 즉흥적인 모험기를 보며 대리만족과 함께 마음속 '계획'을 한 주먹 내려놓아 보세요!
+                    </p>
+                </div>
+                <div class="md:col-span-4 bg-beige border-2 border-brownText p-5 rounded-2xl space-y-3 shadow-inner">
+                    <h4 class="font-bold text-lg flex items-center gap-2">
+                        💡 P식 여행 생존 법칙
+                    </h4>
+                    <ul class="space-y-2 text-sm font-handwriting text-lg text-brownLight">
+                        <li class="flex items-start gap-2">📌 1. 가고 싶은 곳은 '그때 가서' 검색한다.</li>
+                        <li class="flex items-start gap-2">📌 2. 길을 잃으면 새로운 구경거리를 찾는다.</li>
+                        <li class="flex items-start gap-2">📌 3. 식당 문이 닫혀있으면 앞집에 간다.</li>
+                        <li class="flex items-start gap-2">📌 4. 여권을 잃어버려도.. 어떻게든 집엔 간다!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. TRAVEL PREVIEW (HIGHLIGHT CARDS) -->
+    <section class="container mx-auto px-4 py-12 max-w-5xl">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-black mb-3">📸 3박 4일 미리보기 스케치</h2>
+            <p class="font-handwriting text-xl text-brownLight">일기장 속 핵심 사건들의 하이라이트 폴라로이드 사진</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Highlight Card 1 -->
+            <div class="bg-white border-4 border-brownText p-4 rounded-2xl shadow-retro transform rotate-[-2deg] hover:rotate-0 transition-all hover:scale-105 duration-300">
+                <div class="bg-blue-100 border-2 border-brownText rounded-lg h-48 flex flex-col items-center justify-center relative overflow-hidden mb-3">
+                    <span class="text-6xl mb-2">☔</span>
+                    <span class="text-xs bg-black/60 text-white px-2 py-0.5 rounded-full">Day 1</span>
+                </div>
+                <div class="space-y-1 text-center">
+                    <span class="font-handwriting text-xl font-bold block text-brownText">비에 젖은 밤 11시 라멘</span>
+                    <p class="text-xs text-brownLight">2시간 동안 오들오들 떨며 기다린 진짜 감동의 맛</p>
+                </div>
+            </div>
+
+            <!-- Highlight Card 2 -->
+            <div class="bg-white border-4 border-brownText p-4 rounded-2xl shadow-retro transform rotate-[3deg] hover:rotate-0 transition-all hover:scale-105 duration-300">
+                <div class="bg-yellow-100 border-2 border-brownText rounded-lg h-48 flex flex-col items-center justify-center relative overflow-hidden mb-3">
+                    <span class="text-6xl mb-2">⛵</span>
+                    <span class="text-xs bg-black/60 text-white px-2 py-0.5 rounded-full">Day 2</span>
+                </div>
+                <div class="space-y-1 text-center">
+                    <span class="font-handwriting text-xl font-bold block text-brownText">냅다 탄 리버크루즈</span>
+                    <p class="text-xs text-brownLight">가장 신나고 낭만 넘쳤던 우연한 탑승기</p>
+                </div>
+            </div>
+
+            <!-- Highlight Card 3 -->
+            <div class="bg-white border-4 border-brownText p-4 rounded-2xl shadow-retro transform rotate-[-1deg] hover:rotate-0 transition-all hover:scale-105 duration-300">
+                <div class="bg-emerald-100 border-2 border-brownText rounded-lg h-48 flex flex-col items-center justify-center relative overflow-hidden mb-3">
+                    <span class="text-6xl mb-2">🍣</span>
+                    <span class="text-xs bg-black/60 text-white px-2 py-0.5 rounded-full">Day 3</span>
+                </div>
+                <div class="space-y-1 text-center">
+                    <span class="font-handwriting text-xl font-bold block text-brownText">길잃다 발견한 인생초밥</span>
+                    <p class="text-xs text-brownLight">알바생의 구원과 뒤이어 온 청천벽력</p>
+                </div>
+            </div>
+
+            <!-- Highlight Card 4 -->
+            <div class="bg-white border-4 border-brownText p-4 rounded-2xl shadow-retro transform rotate-[2deg] hover:rotate-0 transition-all hover:scale-105 duration-300">
+                <div class="bg-red-100 border-2 border-brownText rounded-lg h-48 flex flex-col items-center justify-center relative overflow-hidden mb-3">
+                    <span class="text-6xl mb-2">🏃‍♀️</span>
+                    <span class="text-xs bg-black/60 text-white px-2 py-0.5 rounded-full">Day 4</span>
+                </div>
+                <div class="space-y-1 text-center">
+                    <span class="font-handwriting text-xl font-bold block text-brownText">심장 쫄깃한 공항 질주</span>
+                    <p class="text-xs text-brownLight">지하철 덤블링 캐리어 레이스와 기차 연착</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- J-STRESS CALCULATOR (INTERACTIVE GAME/WIDGET) -->
+    <section id="diagnose" class="container mx-auto px-4 py-12 max-w-5xl">
+        <div class="bg-white border-4 border-brownText rounded-3xl p-6 md:p-10 shadow-retro relative overflow-hidden">
+            <!-- 배경 데코 라인 -->
+            <div class="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-y-10 translate-x-10">
+                <span class="text-[200px] leading-none select-none">💊</span>
+            </div>
+
+            <div class="max-w-2xl mx-auto text-center space-y-6">
+                <div class="inline-block bg-coralAlert text-white border-2 border-brownText px-3 py-1 rounded-full font-handwriting text-lg font-bold">
+                    🩺 스트레스 긴급 수혈
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black">완벽주의 J를 위한 즉흥성 진단 연구소</h2>
+                <p class="text-brownLight font-handwriting text-xl">
+                    현재 당신의 여행 계획 집착도를 입력하고, 즉흥 여행이 주는 처방전(P 부적)을 발급받아 가세요!
+                </p>
+
+                <!-- 진단 질문 폼 -->
+                <div class="bg-beige border-4 border-brownText p-6 rounded-2xl shadow-retro-sm text-left space-y-6">
+                    <div class="space-y-2">
+                        <label class="font-bold block text-lg">Q1. 가려던 인생 맛집이 오늘 하필 정기휴무라면?</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <button onclick="selectAnswer('q1', 30, this)" class="q1-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                😭 속상하고 멘탈이 흔들려 우울해진다.
+                            </button>
+                            <button onclick="selectAnswer('q1', 10, this)" class="q1-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                📱 즉시 차선책 리스트 2안을 꺼낸다.
+                            </button>
+                            <button onclick="selectAnswer('q1', 0, this)" class="q1-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                😎 "에라이 바로 앞 식당 아무 데나 가자!"
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="font-bold block text-lg">Q2. 이번 여행의 일정 계획표는 어느 수준인가요?</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <button onclick="selectAnswer('q2', 40, this)" class="q2-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                📊 구글 맵, 동선, 시간 분 단위 엑셀 완비!
+                            </button>
+                            <button onclick="selectAnswer('q2', 20, this)" class="q2-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                🗺️ 가고 싶은 핫플 4-5개랑 동선만 확보.
+                            </button>
+                            <button onclick="selectAnswer('q2', 0, this)" class="q2-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                🎟️ 항공권이랑 숙소만 일단 끝! 가서 생각함.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="font-bold block text-lg">Q3. 여행 중 갑작스러운 폭우가 쏟아져 온몸이 다 젖는다면?</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <button onclick="selectAnswer('q3', 30, this)" class="q3-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                🌧️ 옷 다 젖어 불쾌하고 일정이 취소돼 분노한다.
+                            </button>
+                            <button onclick="selectAnswer('q3', 15, this)" class="q3-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                ☕ 근처 실내 카페나 몰로 급히 대피한다.
+                            </button>
+                            <button onclick="selectAnswer('q3', 0, this)" class="q3-btn p-3 bg-white border-2 border-brownText rounded-xl font-medium text-sm hover:bg-yellowPoint/40 transition-all text-left">
+                                🤪 "우와 미쳤다! 비 맞으며 그냥 걸어!"
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-center pt-2">
+                        <button onclick="calculateStress()" class="bg-yellowPoint hover:bg-[#FFD54F] border-4 border-brownText text-brownText font-bold text-lg px-8 py-4 rounded-2xl shadow-retro hover:shadow-retro-active hover:translate-x-[4px] hover:translate-y-[4px] transition-all">
+                            🧪 나의 J 스트레스 종합 지수 확인 및 무계획 부적 뽑기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 진단 결과 모달/출력 영역 -->
+                <div id="resultArea" class="hidden bg-tapePink border-4 border-brownText p-6 rounded-2xl shadow-retro text-left space-y-4">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl" id="resultEmoji">🔬</span>
+                        <div>
+                            <h3 class="font-black text-2xl" id="resultTitle">자가진단 검진표</h3>
+                            <p class="font-handwriting text-lg text-brownLight">당신의 영혼에 흐르는 즉흥 수치 결과</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 커스텀 바 -->
+                    <div class="w-full bg-white border-2 border-brownText h-6 rounded-full overflow-hidden relative">
+                        <div id="resultProgressBar" class="h-full bg-coralAlert transition-all duration-1000" style="width: 0%;"></div>
+                        <span id="resultProgressText" class="absolute inset-0 flex justify-center items-center text-xs font-bold text-brownText">0%</span>
+                    </div>
+
+                    <div class="bg-white border-2 border-brownText p-4 rounded-xl space-y-2">
+                        <p class="font-semibold text-lg" id="resultDesc">불러오는 중...</p>
+                        <div class="border-t border-dashed border-brownText pt-2">
+                            <span class="text-xs text-white bg-brownText font-bold px-2 py-0.5 rounded uppercase">P-PRESCRIPTION</span>
+                            <p class="mt-1 text-sm font-handwriting text-lg text-brownLight" id="resultPrescription">
+                                진단서 결과
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 즉흥 부적 이미지 발급 -->
+                    <div id="talismanBox" class="bg-white border-4 border-dashed border-[#FFE082] p-4 rounded-xl flex flex-col items-center justify-center text-center space-y-2">
+                        <span class="font-handwriting text-2xl font-bold text-coralAlert">🔮 오늘의 무계획 부적 🔮</span>
+                        <div id="talismanImage" class="text-5xl my-2">🎟️</div>
+                        <p class="font-bold text-lg" id="talismanName">길가다 그냥 들어간 식당이 인생 맛집이 되는 부적</p>
+                        <p class="text-xs text-brownLight">화면을 캡처하여 스트레스 받을 때 꺼내 보세요.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. STORY TIMELINE (시간 순서형 타임라인) -->
+    <section id="timeline" class="container mx-auto px-4 py-12 max-w-5xl">
+        <div class="text-center mb-16">
+            <span class="bg-tapePink text-brownText border-2 border-brownText px-4 py-1.5 rounded-full font-handwriting text-lg md:text-xl rotate-[-2deg] inline-block font-bold">
+                🗺️ 우당탕탕 3박 4일 일기장 타임라인
+            </span>
+            <h2 class="text-3xl md:text-5xl font-black mt-4 mb-2">계획대로 안 된 게 자랑입니다!</h2>
+            <p class="text-brownLight font-handwriting text-xl max-w-xl mx-auto">
+                글씨를 대충 끄적이고 스티커를 붙여 만든 다이어리를 들여다보듯 가볍고 흥미진진한 일기를 감상해보세요.
+            </p>
+        </div>
+
+        <div class="relative border-l-4 border-dashed border-brownText ml-4 md:ml-12 pl-6 md:pl-12 space-y-16">
+            
+            <!-- DAY 1 -->
+            <div class="relative">
+                <!-- 타임라인 아이콘 배지 -->
+                <div class="absolute -left-[54px] md:-left-[78px] top-0 w-14 h-14 md:w-20 md:h-20 bg-white border-4 border-brownText rounded-2xl flex flex-col justify-center items-center shadow-retro-sm">
+                    <span class="font-handwriting text-base md:text-xl font-bold text-brownLight leading-none">DAY</span>
+                    <span class="font-handwriting text-2xl md:text-3xl font-black text-brownText leading-none">1</span>
+                </div>
+
+                <div class="bg-white border-4 border-brownText p-6 md:p-8 rounded-3xl shadow-retro space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">☔ 폭우속 야경</span>
+                        <span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">🍜 밤 11시의 위로</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-black">비에 젖은 야경과 밤 11시의 인생 라멘</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                        <div class="md:col-span-7 space-y-3 font-handwriting text-xl text-brownLight leading-relaxed">
+                            <p>
+                                <strong>비가 올 줄은 상상도 못했다..!</strong> 야심차게 오사카의 아름다운 하늘을 굽어보겠다며 높은 전망대로 향했지만 우리를 반긴 건 세찬 빗방울과 휘몰아치는 돌풍이었다.
+                            </p>
+                            <p class="bg-beige p-3 rounded-xl border border-brownText/20 rotate-1">
+                                💡 <em>"전망대 규정상 우산을 쓸 수 없으십니다..."</em> 라는 청천벽력 같은 직원의 말. <br>
+                                결국 우린 온몸으로 비를 흠뻑 맞아 생쥐 꼴이 되었지만, 빗물 속에 번져나간 아련한 도시의 네온사인 야경은 정말 황홀한 잊지 못할 찰나의 영화 속 한 장면 같았다!
+                            </p>
+                            <p>
+                                너무 떨고 돌아오니 저녁 9시가 훌쩍 넘은 시간. 대충 아무 라멘집이나 가려다 근처의 구글 평점 높은 가게를 선택했는데 무려 2시간 웨이팅... 
+                                밤 11시에 한 입 베어 물어 삼킨 <strong>뜨끈하고 기름진 돈코츠 국물</strong>은 온 세상을 녹였다. 평생 먹은 면요리 통틀어 제일 맛있었다!
+                            </p>
+                        </div>
+                        <div class="md:col-span-5">
+                            <div class="bg-beige border-2 border-brownText p-4 rounded-xl text-center shadow-inner relative transform rotate-1">
+                                <!-- 가짜 폴라로이드 사진 -->
+                                <div class="w-full h-48 bg-blue-300 rounded border border-brownText flex flex-col justify-center items-center text-white font-bold relative overflow-hidden">
+                                    <span class="text-6xl text-white opacity-80 swinging">🍜</span>
+                                    <span class="absolute bottom-2 text-xs bg-black/50 px-2 py-0.5 rounded">고생 뒤에 진짜 보상이 있다!</span>
+                                </div>
+                                <p class="font-handwriting text-sm mt-2 text-brownText font-bold">비바람 속에서 찰칵 & 따뜻한 한 그릇</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 2 -->
+            <div class="relative">
+                <!-- 타임라인 아이콘 배지 -->
+                <div class="absolute -left-[54px] md:-left-[78px] top-0 w-14 h-14 md:w-20 md:h-20 bg-white border-4 border-brownText rounded-2xl flex flex-col justify-center items-center shadow-retro-sm">
+                    <span class="font-handwriting text-base md:text-xl font-bold text-brownLight leading-none">DAY</span>
+                    <span class="font-handwriting text-2xl md:text-3xl font-black text-brownText leading-none">2</span>
+                </div>
+
+                <div class="bg-white border-4 border-brownText p-6 md:p-8 rounded-3xl shadow-retro space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="bg-yellowPoint/40 text-brownText text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">⛵ 도톤보리 크루즈</span>
+                        <span class="bg-pink-100 text-pink-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">📸 프리쿠라 우당탕탕</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-black">무계획이 준 선물: 즉흥 리버크루즈 & 스티커 사진</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                        <div class="md:col-span-7 space-y-3 font-handwriting text-xl text-brownLight leading-relaxed">
+                            <p>
+                                2일차 아침, 목적지도 없이 도톤보리 강변을 실실 걸어가다 강 위에 통통 다니는 예쁜 배를 마주쳤다. 
+                                <em>"어라? 저거 타볼까?" "콜!"</em> 매표소로 냅다 달려가 바로 다음 기차(?)가 아니라 배 표를 샀다. 
+                            </p>
+                            <p class="bg-[#C8E6C9]/40 p-3 rounded-xl border border-brownText/20 -rotate-1">
+                                물 위에서 맞이한 오사카의 경쾌한 바람, 다리 위에서 열심히 손을 흔들어주던 따스한 오사카 시민들의 미소는 이번 여행 중에서 가장 <strong>마음속 깊이 행복하고 짜릿한 하이라이트</strong>였다. 계획에 단 한 줄도 적혀있지 않은 순간이었다!
+                            </p>
+                            <p>
+                                밤에는 요상한 네온사인의 레트로풍 스티커 사진기(Purikura)를 발견해 이끌리듯 입장. 기계 작동법도 온통 외계어(일본어)라 땀 뻘뻘 흘리며 멍 때리는데, 옆 부스에서 우릴 보던 천사 같은 현지인 친구가 다가왔다. 
+                                손수 버튼을 조작해주며 하트를 그려주던 따뜻한 정... 완성된 우스꽝스러운 외계인 얼굴 사진은 우리의 평생 소장 보물이다.
+                            </p>
+                        </div>
+                        <div class="md:col-span-5">
+                            <div class="bg-beige border-2 border-brownText p-4 rounded-xl text-center shadow-inner relative transform -rotate-1">
+                                <div class="w-full h-48 bg-yellow-200 rounded border border-brownText flex flex-col justify-center items-center text-white font-bold relative overflow-hidden">
+                                    <span class="text-6xl text-white opacity-80 swinging">⛵</span>
+                                    <span class="absolute bottom-2 text-xs bg-black/50 px-2 py-0.5 rounded">냅다 몸을 던졌을 때 열리는 뷰</span>
+                                </div>
+                                <p class="font-handwriting text-sm mt-2 text-brownText font-bold">도톤보리 강물 위의 우연한 유영</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 3 -->
+            <div class="relative">
+                <!-- 타임라인 아이콘 배지 -->
+                <div class="absolute -left-[54px] md:-left-[78px] top-0 w-14 h-14 md:w-20 md:h-20 bg-white border-4 border-brownText rounded-2xl flex flex-col justify-center items-center shadow-retro-sm">
+                    <span class="font-handwriting text-base md:text-xl font-bold text-brownLight leading-none">DAY</span>
+                    <span class="font-handwriting text-2xl md:text-3xl font-black text-brownText leading-none">3</span>
+                </div>
+
+                <div class="bg-white border-4 border-brownText p-6 md:p-8 rounded-3xl shadow-retro space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">🍣 길 가다 마주친 인생 초밥</span>
+                        <span class="bg-red-100 text-red-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">🚨 심장 덜컥 여권 분실</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-black">초밥집에서 찾은 행운, 그리고 밤 12시의 여권 오열</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                        <div class="md:col-span-7 space-y-3 font-handwriting text-xl text-brownLight leading-relaxed">
+                            <p>
+                                가려던 블로그 맛집은 당연히 줄이 몇백 미터 서 있었다. 쿨하게 포기하고 아무도 안 갈 것 같은 외진 골목을 배회하다 낡은 간판의 노포 초밥집으로 스르륵 굴러 들어갔다.
+                            </p>
+                            <p class="bg-amber-100/50 p-3 rounded-xl border border-brownText/20 rotate-1">
+                                깜짝 놀랍게도 그곳 아르바이트 직원이 한국어를 무척 잘했고, 그의 추천으로 맛본 엄청 도톰한 <strong>참치뱃살(오토로)과 로컬 사케</strong>는 역대급 성공이었다. 완벽한 도박 성공!
+                            </p>
+                            <p class="text-[#D84315] font-bold">
+                                하지만 행복은 거기까지였다... <br>
+                                늦은 밤 숙소에 도착해 가방을 털던 친구의 외마디 비명. "여... 여권이 없어!!"
+                                기억을 더듬어보니 낮에 가방 탈탈 털어 면세 할인을 받으려 들른 디즈니 스토어에 두고 온 것이었다. 기쁨도 잠시, 땀샘 폭발과 수많은 상상들이 머릿속을 강타했다. 내일 귀국인데!
+                            </p>
+                        </div>
+                        <div class="md:col-span-5">
+                            <div class="bg-beige border-2 border-brownText p-4 rounded-xl text-center shadow-inner relative transform rotate-2">
+                                <div class="w-full h-48 bg-emerald-200 rounded border border-brownText flex flex-col justify-center items-center text-white font-bold relative overflow-hidden">
+                                    <span class="text-6xl text-white opacity-80 swinging">🍣</span>
+                                    <span class="absolute bottom-2 text-xs bg-black/50 px-2 py-0.5 rounded">천국과 지옥을 동시에 맛본 하루</span>
+                                </div>
+                                <p class="font-handwriting text-sm mt-2 text-brownText font-bold">그 두툼하고 꿀맛 같던 로컬 초밥</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 4 -->
+            <div class="relative">
+                <!-- 타임라인 아이콘 배지 -->
+                <div class="absolute -left-[54px] md:-left-[78px] top-0 w-14 h-14 md:w-20 md:h-20 bg-white border-4 border-brownText rounded-2xl flex flex-col justify-center items-center shadow-retro-sm">
+                    <span class="font-handwriting text-base md:text-xl font-bold text-brownLight leading-none">DAY</span>
+                    <span class="font-handwriting text-2xl md:text-3xl font-black text-brownText leading-none">4</span>
+                </div>
+
+                <div class="bg-white border-4 border-brownText p-6 md:p-8 rounded-3xl shadow-retro space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="bg-red-100 text-red-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">🏋️‍♀️ 계단 지옥 질주</span>
+                        <span class="bg-purple-100 text-purple-800 text-xs px-2.5 py-1 rounded-full border border-brownText font-semibold">🚆 공항 런 & 기차 연착</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-black">여권 수거 대작전과 심장 터질뻔한 귀국길</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                        <div class="md:col-span-7 space-y-3 font-handwriting text-xl text-brownLight leading-relaxed">
+                            <p>
+                                아침 일찍부터 디즈니랜드 센터에 전화를 거는데 직원분의 아주 투박한 영어와 우리의 다급함이 부딪혀 의사소통 난항... 간신히 여권이 보관되어 있다는 소식을 얻어냈다!
+                            </p>
+                            <p class="bg-red-50 p-3 rounded-xl border border-red-200 -rotate-1">
+                                무거운 대형 캐리어를 끌고 지하철 엘리베이터도 없는 깊은 계단길을 헐떡이며 오르내리기를 수십 번. 
+                                결국 여권을 소중히 가슴에 품고 극적으로 수거에 성공했다!
+                            </p>
+                            <p>
+                                남은 소중한 2시간 동안 우리는 절대로 굴하지 않고 <strong>교토로 향하는 기적의 일정을 감행</strong>했다. 2시간 만에 교토에서 진짜 미친 듯이 바쁘게 쏘다니며 덮밥을 먹었다. 고생 끝에 들어간 고기덮밥은 정말 사기적인 꿀맛이었다.
+                            </p>
+                            <p>
+                                구경을 마치고 공항 가는 특급 기차를 간신히 탔으나, 갑자기 선로 사고로 <strong>기차가 30분 멈춰 서는 초대형 참사 발생!</strong> 
+                                기차 속에서 비행기 놓칠 생각에 손발이 달달 떨렸지만 공항 문을 열자마자 인생 최초로 미친 육상 선수처럼 질주하여 출발 15분 전 극적 탑승 완료! 평생 기억에 새겨질 스릴 만점 귀국이었다.
+                            </p>
+                        </div>
+                        <div class="md:col-span-5">
+                            <div class="bg-beige border-2 border-brownText p-4 rounded-xl text-center shadow-inner relative transform -rotate-2">
+                                <div class="w-full h-48 bg-red-400 rounded border border-brownText flex flex-col justify-center items-center text-white font-bold relative overflow-hidden">
+                                    <span class="text-6xl text-white opacity-80 swinging">🏃‍♀️</span>
+                                    <span class="absolute bottom-2 text-xs bg-black/50 px-2 py-0.5 rounded">공항 게이트를 향한 전력질주!</span>
+                                </div>
+                                <p class="font-handwriting text-sm mt-2 text-brownText font-bold">목숨 걸고 되찾아낸 여권과 티켓</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. OTHER MEMORIES GALLERY -->
+    <section id="gallery" class="container mx-auto px-4 py-12 max-w-5xl">
+        <div class="bg-white border-4 border-brownText rounded-3xl p-6 md:p-10 shadow-retro relative">
+            <div class="text-center mb-10">
+                <span class="text-4xl">🍡</span>
+                <h2 class="text-3xl font-black mt-2">우당탕탕 B컷 오사카 갤러리</h2>
+                <p class="font-handwriting text-lg text-brownLight">계획엔 없었지만 눈과 배를 채워준 수많은 찰나들</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Gallery 1 -->
+                <div class="group bg-beige border-2 border-brownText p-2 rounded-xl transform hover:scale-105 hover:rotate-1 transition-all shadow-retro-sm">
+                    <div class="w-full h-32 bg-amber-100 border border-brownText rounded flex items-center justify-center text-3xl">🍡</div>
+                    <p class="font-handwriting text-center text-sm mt-1 text-brownText font-bold">길거리 편의점 털이</p>
+                </div>
+                <!-- Gallery 2 -->
+                <div class="group bg-beige border-2 border-brownText p-2 rounded-xl transform hover:scale-105 hover:-rotate-1 transition-all shadow-retro-sm">
+                    <div class="w-full h-32 bg-blue-100 border border-brownText rounded flex items-center justify-center text-3xl">🎪</div>
+                    <p class="font-handwriting text-center text-sm mt-1 text-brownText font-bold">길 잃은 오사카 골목</p>
+                </div>
+                <!-- Gallery 3 -->
+                <div class="group bg-beige border-2 border-brownText p-2 rounded-xl transform hover:scale-105 hover:rotate-2 transition-all shadow-retro-sm">
+                    <div class="w-full h-32 bg-red-100 border border-brownText rounded flex items-center justify-center text-3xl">🎫</div>
+                    <p class="font-handwriting text-center text-sm mt-1 text-brownText font-bold">구겨진 교통 카드들</p>
+                </div>
+                <!-- Gallery 4 -->
+                <div class="group bg-beige border-2 border-brownText p-2 rounded-xl transform hover:scale-105 hover:-rotate-2 transition-all shadow-retro-sm">
+                    <div class="w-full h-32 bg-yellow-100 border border-brownText rounded flex items-center justify-center text-3xl">🍛</div>
+                    <p class="font-handwriting text-center text-sm mt-1 text-brownText font-bold">교토 2시간 컷 덮밥</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. EPILOGUE & CTA FOOTER -->
+    <footer class="container mx-auto px-4 py-16 max-w-5xl">
+        <div class="bg-yellowPoint border-4 border-brownText p-8 md:p-12 rounded-3xl text-center space-y-6 shadow-retro relative overflow-hidden">
+            <!-- 스프링 줄무늬 장식 효과 -->
+            <div class="absolute left-0 right-0 top-0 h-4 bg-white border-b-4 border-brownText"></div>
+
+            <span class="text-5xl inline-block swinging">🕊️</span>
+            <h2 class="text-3xl md:text-4xl font-black">돌이켜보니, 완벽하지 않아서 완벽했던 여행</h2>
+            
+            <p class="font-handwriting text-2xl text-brownText max-w-2xl mx-auto leading-relaxed">
+                "만약 우리가 비를 피해 실내로만 다녔다면, 밤 11시의 뜨끈했던 라멘 국물을 온몸으로 감격하며 맛볼 수 있었을까요? <br>
+                만약 여권을 분실하지 않았다면, 친구와 무거운 캐리어를 양손에 쥐고 오사카 지하철 계단 위에서 눈물을 참던 웃픈 무용담을 평생 가질 수 있었을까요?"
+            </p>
+
+            <p class="text-sm md:text-base text-brownLight max-w-xl mx-auto break-keep">
+                사랑하는 J 친구 여러분! 완벽한 계획대로 흐르지 않았다고 해서 결코 실망할 이유가 없습니다. <br>
+                오히려 그 우연한 틈바구니 속에서 당신 인생 최고의 보물 같은 명장면이 불쑥 튀어 나올 테니까요. 가끔은 가이드북을 집에 던져두고, 몸이 흘러가는 대로 즉흥 여행의 낭만을 안아보세요!
+            </p>
+
+            <div class="border-t-2 border-dashed border-brownText/40 pt-6">
+                <p class="font-handwriting text-lg text-brownLight font-bold">
+                    © 2026 MBTI 'P' 둘의 오사카 즉흥 대소동 다이어리.
+                </p>
+                <p class="text-xs text-brownLight mt-1">
+                    우린 살아남았고, 다음엔 어디로 길을 잃을지 행복한 고민 중입니다!
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 전역 상태 변수들
+        const answers = {
+            q1: null,
+            q2: null,
+            q3: null
+        };
+
+        // 답변 선택 처리 및 스타일 업데이트
+        function selectAnswer(question, score, element) {
+            answers[question] = score;
+
+            // 해당 질문군 버튼들의 하이라이트 초기화
+            const buttons = document.querySelectorAll(`.${question}-btn`);
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-yellowPoint', 'border-4');
+                btn.classList.add('bg-white', 'border-2');
+            });
+
+            // 선택된 버튼 활성화 스타일링
+            element.classList.remove('bg-white', 'border-2');
+            element.classList.add('bg-yellowPoint', 'border-4');
+        }
+
+        // 스트레스 계산 및 결과 노출
+        function calculateStress() {
+            // 모든 질문에 답변했는지 검증
+            if (answers.q1 === null || answers.q2 === null || answers.q3 === null) {
+                alert("아직 선택하지 않은 검진 질문이 있어요! 모든 슬롯을 터치하고 발급 버튼을 눌러주세요 🔬");
+                return;
+            }
+
+            const totalScore = answers.q1 + answers.q2 + answers.q3; // 0점 ~ 100점 분포
+            const resultArea = document.getElementById('resultArea');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultEmoji = document.getElementById('resultEmoji');
+            const resultDesc = document.getElementById('resultDesc');
+            const resultPrescription = document.getElementById('resultPrescription');
+            const resultProgressBar = document.getElementById('resultProgressBar');
+            const resultProgressText = document.getElementById('resultProgressText');
+            
+            const talismanImage = document.getElementById('talismanImage');
+            const talismanName = document.getElementById('talismanName');
+
+            // 숨김 영역 노출 및 스크롤 이동
+            resultArea.classList.remove('hidden');
+            resultArea.scrollIntoView({ behavior: 'smooth' });
+
+            // 프로그레스 바 충전 애니메이션 연출을 위해 타임아웃 부여
+            setTimeout(() => {
+                resultProgressBar.style.width = `${totalScore}%`;
+                resultProgressText.innerText = `${totalScore}%`;
+            }, 100);
+
+            // 스코어별 분류 및 부적 무작위성 가미
+            let title = "";
+            let emoji = "";
+            let desc = "";
+            let prescription = "";
+            
+            // 부적 셋업 후보군
+            const talismans = [
+                { emoji: "🍣", name: "길을 잃어야만 만나는 도톰한 인생 초밥 행운 부적" },
+                { emoji: "🍜", name: "비를 쫄딱 맞아 머리가 젖어야만 진가를 발휘하는 밤 11시 인생 라멘 부적" },
+                { emoji: "⛵", name: "아무 생각 없이 냅다 발을 들였을 때 열리는 도톤보리 크루즈 낭만 부적" },
+                { emoji: "🎫", name: "역무원이 영어를 일절 못해도 눈빛으로 목적지를 통과하는 프리패스 구원 부적" },
+                { emoji: "👭", name: "말 한마디 안 통해도 알아서 완벽 필터를 입혀 출력해주는 우연한 일본인 친구 인연 부적" },
+                { emoji: "🏃‍♀️", name: "캐리어를 던져 지하철 계단을 뛰어올라도 비행기 문 닫히기 직전 세이프 하는 공항 초스피드 질주 부적" }
+            ];
+
+            const selectedTalisman = talismans[Math.floor(Math.random() * talismans.length)];
+
+            if (totalScore >= 75) {
+                title = "구조 신호! 완벽주의 계획 강박 'J' 말기";
+                emoji = "🚨";
+                desc = "현재 계획에 과부하가 심각하여 작은 돌발 상황에도 깊은 분노와 좌절을 느낄 위험이 매우 큽니다. 당신의 여행은 리포트 작성이 아닌 가슴 뛰는 휴식입니다!";
+                prescription = "즉시 여행 계획표의 50%를 칼로 베어내어 공백으로 남겨두고, 비 내리는 오사카성 구경 도중 길 잃기 1회를 강제 시술 처방합니다.";
+            } else if (totalScore >= 40) {
+                title = "안정권! 중등도 수준의 유연한 'J'";
+                emoji = "📋";
+                desc = "계획을 철저히 짜며 마음의 평안을 얻으시나, 어쩔 수 없는 위기 상황에서는 겉은 떨려도 속으로는 유연한 대처를 하실 수 있는 멋진 잠재적 여행자입니다.";
+                prescription = "다음 오사카 여행 시에는 유명 가이드북을 한 번쯤 숙소 테이블에 두고 나가서 오로지 눈앞의 예쁜 골목으로만 빠져드는 골목 침투술을 처방합니다.";
+            } else {
+                title = "자유로운 영혼! 뼛속까지 만끽하는 'P' 성향";
+                emoji = "🎒";
+                desc = "당신은 이미 우당탕탕 여행의 끝판왕! 어떠한 기차 연착이나 폭우, 여권 분실 앞에서도 '하하 어쩌겠어 어떻게든 되겠지!'하며 무한의 낙천주의 에너지를 발동합니다.";
+                prescription = "앞으로도 세상을 향해 대책 없는 낭만을 전파하여 잔뜩 스트레스에 짓눌린 전 세계 J들의 영혼을 따뜻하게 구제해주시길 적극 처방합니다.";
+            }
+
+            resultTitle.innerText = title;
+            resultEmoji.innerText = emoji;
+            resultDesc.innerText = desc;
+            resultPrescription.innerText = prescription;
+
+            // 부적 렌더링
+            talismanImage.innerText = selectedTalisman.emoji;
+            talismanName.innerText = selectedTalisman.name;
+        }
+    </script>
+</body>
+</html>
